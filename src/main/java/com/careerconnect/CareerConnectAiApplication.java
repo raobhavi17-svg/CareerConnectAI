@@ -1,4 +1,4 @@
-package com.example.careerconnectai;
+package com.careerconnect;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

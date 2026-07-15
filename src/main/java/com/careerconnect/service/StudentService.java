@@ -1,16 +1,17 @@
 package com.careerconnect.service;
 
-import com.careerconnect.model.entity.Student;
+import com.careerconnect.dto.request.StudentRequest;
+import com.careerconnect.dto.response.StudentResponse;
 
 import java.util.List;
 
 public interface StudentService {
 
-    Student registerStudent(Student student);
+    StudentResponse registerStudent(StudentRequest request);
 
-    Student getStudentById(String studentId);
+    StudentResponse getStudentById(String studentId);
 
-    List<Student> getAllStudents();
+    List<StudentResponse> getAllStudents();
 
     void deleteStudent(String studentId);
 }

@@ -1,14 +1,15 @@
 package com.careerconnect.service;
 
-import com.careerconnect.model.entity.Company;
+import com.careerconnect.dto.request.CompanyRequest;
+import com.careerconnect.dto.response.CompanyResponse;
 
 import java.util.List;
 
 public interface CompanyService {
 
-    Company registerCompany(Company company);
+    CompanyResponse registerCompany(CompanyRequest request);
 
-    Company getCompanyById(String companyId);
+    CompanyResponse getCompanyById(String companyId);
 
-    List<Company> getAllCompanies();
+    List<CompanyResponse> getAllCompanies();
 }

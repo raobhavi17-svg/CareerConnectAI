@@ -1,7 +1,11 @@
 package com.careerconnect.controller;
 
-import com.careerconnect.model.entity.Student;
+import com.careerconnect.dto.request.StudentRequest;
+import com.careerconnect.dto.response.StudentResponse;
 import com.careerconnect.service.StudentService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,22 +21,31 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student registerStudent(@RequestBody Student student) {
-        return studentService.registerStudent(student);
+    public ResponseEntity<StudentResponse> registerStudent(
+            @Valid @RequestBody StudentRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(studentService.registerStudent(request));
     }
 
     @GetMapping("/{id}")
-    public Student getStudent(@PathVariable String id) {
-        return studentService.getStudentById(id);
+    public ResponseEntity<StudentResponse> getStudent(
+            @PathVariable String id) {
+
+        return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<List<StudentResponse>> getAllStudents() {
+
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable String id) {
+    public ResponseEntity<Void> deleteStudent(@PathVariable String id) {
+
         studentService.deleteStudent(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

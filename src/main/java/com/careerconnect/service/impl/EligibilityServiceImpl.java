@@ -3,31 +3,33 @@ package com.careerconnect.service.impl;
 import com.careerconnect.model.entity.PlacementDrive;
 import com.careerconnect.model.entity.Student;
 import com.careerconnect.service.EligibilityService;
-import com.careerconnect.strategy.EligibilityStrategy;
+import com.careerconnect.strategy.impl.BacklogEligibilityStrategy;
+import com.careerconnect.strategy.impl.CgpaEligibilityStrategy;
+import com.careerconnect.strategy.impl.SkillEligibilityStrategy;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class EligibilityServiceImpl implements EligibilityService {
 
-    private final List<EligibilityStrategy> strategies;
+    private final CgpaEligibilityStrategy cgpaStrategy;
+    private final BacklogEligibilityStrategy backlogStrategy;
+    private final SkillEligibilityStrategy skillStrategy;
 
-    public EligibilityServiceImpl(List<EligibilityStrategy> strategies) {
-        this.strategies = strategies;
+    public EligibilityServiceImpl(
+            CgpaEligibilityStrategy cgpaStrategy,
+            BacklogEligibilityStrategy backlogStrategy,
+            SkillEligibilityStrategy skillStrategy) {
+
+        this.cgpaStrategy = cgpaStrategy;
+        this.backlogStrategy = backlogStrategy;
+        this.skillStrategy = skillStrategy;
     }
 
     @Override
     public boolean checkEligibility(Student student, PlacementDrive drive) {
 
-        for (EligibilityStrategy strategy : strategies) {
-
-            if (!strategy.isEligible(student, drive)) {
-                return false;
-            }
-
-        }
-
-        return true;
+        return cgpaStrategy.isEligible(student, drive)
+                && backlogStrategy.isEligible(student, drive)
+                && skillStrategy.isEligible(student, drive);
     }
 }

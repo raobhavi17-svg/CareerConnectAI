@@ -1,14 +1,15 @@
 package com.careerconnect.service;
 
-import com.careerconnect.model.entity.PlacementDrive;
+import com.careerconnect.dto.request.PlacementDriveRequest;
+import com.careerconnect.dto.response.PlacementDriveResponse;
 
 import java.util.List;
 
 public interface PlacementDriveService {
 
-    PlacementDrive createDrive(PlacementDrive drive);
+    PlacementDriveResponse createDrive(PlacementDriveRequest request);
 
-    PlacementDrive getDriveById(String driveId);
+    PlacementDriveResponse getDriveById(String driveId);
 
-    List<PlacementDrive> getAllDrives();
+    List<PlacementDriveResponse> getAllDrives();
 }

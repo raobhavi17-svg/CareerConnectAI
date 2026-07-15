@@ -1,7 +1,11 @@
 package com.careerconnect.controller;
 
-import com.careerconnect.model.entity.PlacementDrive;
+import com.careerconnect.dto.request.PlacementDriveRequest;
+import com.careerconnect.dto.response.PlacementDriveResponse;
 import com.careerconnect.service.PlacementDriveService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,17 +21,26 @@ public class PlacementDriveController {
     }
 
     @PostMapping
-    public PlacementDrive createDrive(@RequestBody PlacementDrive drive) {
-        return placementDriveService.createDrive(drive);
+    public ResponseEntity<PlacementDriveResponse> createDrive(
+            @Valid @RequestBody PlacementDriveRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(placementDriveService.createDrive(request));
     }
 
     @GetMapping("/{id}")
-    public PlacementDrive getDrive(@PathVariable String id) {
-        return placementDriveService.getDriveById(id);
+    public ResponseEntity<PlacementDriveResponse> getDrive(@PathVariable String id) {
+
+        return ResponseEntity.ok(
+                placementDriveService.getDriveById(id)
+        );
     }
 
     @GetMapping
-    public List<PlacementDrive> getAllDrives() {
-        return placementDriveService.getAllDrives();
+    public ResponseEntity<List<PlacementDriveResponse>> getAllDrives() {
+
+        return ResponseEntity.ok(
+                placementDriveService.getAllDrives()
+        );
     }
 }

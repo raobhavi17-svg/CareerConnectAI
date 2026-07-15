@@ -1,14 +1,15 @@
 package com.careerconnect.service;
 
-import com.careerconnect.model.entity.Application;
+import com.careerconnect.dto.request.ApplicationRequest;
+import com.careerconnect.dto.response.ApplicationResponse;
 
 import java.util.List;
 
 public interface ApplicationService {
 
-    Application apply(Application application);
+    ApplicationResponse apply(ApplicationRequest request);
 
-    Application getApplicationById(String applicationId);
+    ApplicationResponse getApplicationById(String applicationId);
 
-    List<Application> getAllApplications();
+    List<ApplicationResponse> getAllApplications();
 }

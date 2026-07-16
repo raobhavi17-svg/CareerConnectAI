@@ -332,3 +332,14 @@ Completed Modules
 - Strategy Pattern
 - REST APIs
 - Postman Testing
+## API Documentation
+
+Swagger UI is available at:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+<img width="1911" height="926" alt="image" src="https://github.com/user-attachments/assets/81ac8980-c6f4-437c-98d6-6f3d8afb6d2c" />
+<img width="1918" height="893" alt="image" src="https://github.com/user-attachments/assets/8f9e1cb7-10c1-4252-b080-d9ccf3d1ed88" />
+<img width="1866" height="547" alt="image" src="https://github.com/user-attachments/assets/a793f5c9-ba99-4a9b-b0d7-a8520c6c55cd" />
+

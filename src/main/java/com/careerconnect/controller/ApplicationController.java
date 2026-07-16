@@ -6,10 +6,16 @@ import com.careerconnect.service.ApplicationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(
+        name = "Application API",
+        description = "Operations related to placement applications"
+)
 @RestController
 @RequestMapping("/applications")
 public class ApplicationController {
@@ -19,6 +25,7 @@ public class ApplicationController {
     public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
     }
+    @Operation(summary = "Apply for a placement drive")
 
     @PostMapping
     public ResponseEntity<ApplicationResponse> apply(
@@ -27,6 +34,7 @@ public class ApplicationController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(applicationService.apply(request));
     }
+    @Operation(summary = "Get application by ID")
 
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationResponse> getApplication(
@@ -36,6 +44,7 @@ public class ApplicationController {
                 applicationService.getApplicationById(id)
         );
     }
+    @Operation(summary = "Get all applications")
 
     @GetMapping
     public ResponseEntity<List<ApplicationResponse>> getAllApplications() {

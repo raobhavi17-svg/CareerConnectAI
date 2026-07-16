@@ -6,12 +6,20 @@ import com.careerconnect.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@Tag(
+        name = "Student API",
+        description = "Operations related to student management"
+)
 @RestController
 @RequestMapping("/students")
+
 public class StudentController {
 
     private final StudentService studentService;
@@ -19,6 +27,7 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+    @Operation(summary = "Register a new student")
 
     @PostMapping
     public ResponseEntity<StudentResponse> registerStudent(
@@ -27,6 +36,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(studentService.registerStudent(request));
     }
+    @Operation(summary = "Get student by ID")
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponse> getStudent(
@@ -34,6 +44,7 @@ public class StudentController {
 
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
+    @Operation(summary = "Get student by ID")
 
     @GetMapping
     public ResponseEntity<List<StudentResponse>> getAllStudents() {
